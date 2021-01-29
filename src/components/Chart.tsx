@@ -27,16 +27,13 @@ class Chart extends React.Component<Props, State> {
 	}
 
 	drawChart() {
-		const w = 700;
+		const w = 600;
 		const h = 300;
 
-		let scale = d3.scaleLinear();
-		scale.domain([1, 2, 3, 4, 5, 6]);
-		scale.range([0, 6]);
-
+		const domain = ["1's", "2's", "3's", "4's", "5's", "6's"];
 		let xScale = d3
 			.scaleBand()
-			.domain(["1's", "2's", "3's", "4's", "5's", "6's"])
+			.domain(domain)
 			.rangeRound([0, w])
 			.paddingInner(0.05);
 
@@ -46,7 +43,7 @@ class Chart extends React.Component<Props, State> {
 			.range([0, h]);
 
 		const svg = d3
-			.select("chart")
+			.select("#chart")
 			.append("svg")
 			.attr("width", w)
 			.attr("height", h);
@@ -56,7 +53,7 @@ class Chart extends React.Component<Props, State> {
  			.data(this.data)
 			.enter()
 			.append("rect")
-			.attr("x", (d, i) => xScale(i))
+			.attr("x", (d, i) => i * 100)
 			.attr("y", d => h - yScale(d))
 			.attr("width", xScale.bandwidth())
 			.attr("height", (d) => yScale(d))
@@ -68,7 +65,7 @@ class Chart extends React.Component<Props, State> {
 			.enter()
 			.append('text')
 			.text(d => d)
-			.attr('x', (d, i) => xScale(i) + xScale.bandwidth() / 2)
+			.attr('x', (d, i) => i * 100 + xScale.bandwidth() / 2)
 			.attr('y', d => h - yScale(d) + 14)
 			.attr('font-family', 'sans-serif')
 			.attr('font-size', '11px')
