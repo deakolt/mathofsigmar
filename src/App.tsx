@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Chart from './components/Chart';
 import MathForm from './MathForm';
 
 
@@ -11,6 +12,7 @@ function App() {
       </header>
       <main>
         <MathForm />
+        <Chart />
       </main>
     </div>
   );
