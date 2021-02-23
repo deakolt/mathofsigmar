@@ -3,9 +3,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-import Chart from './components/Chart';
+import DiceRoller from './components/diceroller/DiceRoller';
 import ExpectedDamage from './components/ExpectedDamage';
-import MathForm from './MathForm';
 import Simulation from './components/Simulation';
 import StatsForm from './components/StatsForm';
 
@@ -17,9 +16,7 @@ function App() {
 			  We Math Boys Now
 			</header>
 			<main>
-
-			<MathForm />
-			<Chart />
+			<DiceRoller />
 			<StatsForm />
 			<ExpectedDamage />
 			<Simulation />
