@@ -29,7 +29,7 @@ const defaultState: any = {
 }
 
 class ExpectedDamage extends React.Component<Props, State> {
-	private DECIMAL_PLACES: number = 4;
+	private DECIMAL_PLACES: number = 3;
 
 	constructor(props: any) {
 		super(props);
@@ -99,9 +99,10 @@ class ExpectedDamage extends React.Component<Props, State> {
 	}
 
 	private round(number: number) {
-		const modifier: number = 10^this.DECIMAL_PLACES;
+		// algorithm from https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary
+		const modifier: number = 10**this.DECIMAL_PLACES;
 
-		return Math.round(number * modifier) / modifier;
+		return Math.round((number + Number.EPSILON) * modifier) / modifier;
 	}
 
 	private handleChange(event: any) {
@@ -119,18 +120,19 @@ class ExpectedDamage extends React.Component<Props, State> {
 	render() {
 		return (
 			<form>
-				<label>A</label>
+				<label>Attacks</label>
 				<input type="number"
 					   name="attacks"
 					   value={this.state.attacks}
 					   onChange={this.handleChange} />
+
 				<label>WS/BS</label>
 				<input type="number"
 					   name="bsws"
 					   value={this.state.bsws}
 					   onChange={this.handleChange} />
 
-				<label>S</label>
+				<label>Strength</label>
 				<input type="number"
 					   name="strength"
 					   value={this.state.strength}
@@ -145,10 +147,10 @@ class ExpectedDamage extends React.Component<Props, State> {
 				<label>AP</label>
 				<input type="number"
 					   name="ap"
-					   value={this.state.strength}
+					   value={this.state.ap}
 					   onChange={this.handleChange} />
 
-				<label>T</label>
+				<label>Toughness</label>
 				<input type="number"
 					   name="toughness"
 					   value={this.state.toughness}
