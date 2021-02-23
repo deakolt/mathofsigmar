@@ -6,14 +6,15 @@ interface Props {
 
 interface State {
 	count: number;
-	result: number | undefined;
+	rolls: object;
+	total: number
 }
 
 class MathForm extends React.Component<Props, State> {
 	constructor(props: any) {
 		super(props);
 
-		this.state = { count: 0, result: 0 }
+		this.state = { count: 0, rolls: {}, total: 0 }
 
 		this.handleChange = this.handleChange.bind(this);
 	}
@@ -22,23 +23,25 @@ class MathForm extends React.Component<Props, State> {
 		let count: number = parseInt(event.target.value) || 0;
 		if (count < 0) count = 0;
 		else if (count > 1000) count = 1000;
-		let result = this.rollDice(count);
+		const { rolls, total } = this.rollDice(count);
 
-		this.setState({ count: count, result: result });
+		this.setState({ count: count, rolls: rolls, total: total });
 	}
 
 	getRandomDieRoll() : number {
+		// 1-6
 		return Math.floor(Math.random() * 5) + 1;
 	}
 
-	rollDice(count: number, result?: number ) : any {
-		if (result === undefined) result = 0;
-
+	rollDice(count: number, rolls: any = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}, total: number = 0 ) : any {
 		if (count === 0)  {
-			return result;
+			return { rolls, total };
 		}
 
-		return this.rollDice(count - 1, result + this.getRandomDieRoll());
+		const roll: number = this.getRandomDieRoll();
+		rolls[roll] = rolls[roll]++;
+
+		return this.rollDice(count - 1, rolls, total + roll);
 	}
 
 	render() {
@@ -53,7 +56,7 @@ class MathForm extends React.Component<Props, State> {
 					/>
 				</label>
 				<label>
-					Result: {this.state.result}
+					Result: {this.state.total}
 				</label>
 			</form>
 		);
