@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Chart from './components/Chart';
+import ExpectedDamage from './components/ExpectedDamage';
 import MathForm from './MathForm';
 
 
@@ -13,6 +14,7 @@ function App() {
       <main>
         <MathForm />
         <Chart />
+        <ExpectedDamage />
       </main>
     </div>
   );
