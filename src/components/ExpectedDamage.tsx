@@ -87,9 +87,9 @@ class ExpectedDamage extends React.Component<Props, State> {
 			return 2;
 		} else if (strengthDiff > this.state.toughness) {
 			return 3;
-		} else if (strengthDiff == this.state.toughness) {
+		} else if (strengthDiff === this.state.toughness) {
 			return 4;
-		} else if (strengthDiff * 2 == this.state.toughness) {
+		} else if (strengthDiff * 2 === this.state.toughness) {
 			return 6;
 		} else if (strengthDiff < this.state.toughness) {
 			return 5;
