@@ -4,22 +4,35 @@ import { connect } from 'react-redux'
 import { updateAttacks } from '../redux/actions'
 
 interface Props {
-
+	attacks: number
+	updateAttacks: any
 }
 
 interface State {
 	attacks: number
 }
 
-class StatsForm extends React.Component<Props, State> {
-	constructor() {
-		super(props)
+const mapStateToProps = (state: any) => {
+	console.log('state in MapStateToProps', state);
+	const attacks: number = state['combatStats']['attacks'];
+	return { attacks };
+}
 
-		this.state = { attacks: 0 }
+class StatsForm extends React.Component<Props, State> {
+	constructor(props: any) {
+		super(props);
+
+		this.state = { attacks: 0 };
 	}
 
 	handleUpdateAttacks = (event: any) => {
-		this.props.updateAttacks(this.state.attacks)
+		this.props.updateAttacks(this.state.attacks);
+	}
+
+	updateAttacks = (attacks: any) => {
+		console.log('updateAttacks', attacks)
+		this.setState({ attacks })
+		this.props.updateAttacks(attacks);
 	}
 
 	render() {
@@ -28,14 +41,14 @@ class StatsForm extends React.Component<Props, State> {
 				<label>Attacks</label>
 				<input type="number"
 					   name="attacks"
-					   value={this.state.attacks}
-					   onChange={this.handleUpdateAttacks} />
+					   value={this.props.attacks}
+					   onChange={e => this.updateAttacks(e.target.value)} />
 			</form>
 		)
 	}
 }
 
 export default connect(
-	null,
+	mapStateToProps,
 	{ updateAttacks }
-)(StatsForm)
+)(StatsForm);

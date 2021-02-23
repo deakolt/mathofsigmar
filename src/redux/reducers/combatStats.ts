@@ -11,11 +11,12 @@ const initialState: object = {
 	invulnerableSave: 0
 };
 
-export default function(state = initialState, action) {
+export default function(state = initialState, action: any) {
 	switch (action.type) {
 		case UPDATE_ATTACKS: {
-			const attacks: name = action.payload;
-
+			console.log('combatStats reducer', action)
+			const attacks: number = action.payload.attacks;
+			console.log('combatStats attacks', attacks)
 			return {
 				...state,
 				attacks: attacks
@@ -27,4 +28,3 @@ export default function(state = initialState, action) {
 
 	}
 }
-

@@ -1,5 +1,11 @@
 # Math of Sigmar
 
+# Features
+- Dice roller
+- Match Tracker & History
+- Stats Utility
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
